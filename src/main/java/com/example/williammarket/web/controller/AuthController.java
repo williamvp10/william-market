@@ -4,6 +4,8 @@ import com.example.williammarket.domain.dto.AuthenticationRequest;
 import com.example.williammarket.domain.dto.AuthenticationResponse;
 import com.example.williammarket.domain.service.UserDetailService;
 import com.example.williammarket.web.security.JWTUtil;
+import io.swagger.annotations.ApiKeyAuthDefinition;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,7 @@ public class AuthController {
     @Autowired
     private JWTUtil jwtUtil;
     @PostMapping("/authenticate")
+    @ApiOperation("Authenticate (no token required)")
     public ResponseEntity<AuthenticationResponse> createToken(@RequestBody AuthenticationRequest request){
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getPassword(), request.getPassword()));
